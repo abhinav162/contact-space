@@ -1,0 +1,50 @@
+.navbar {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+    gap: 5px;
+}
+
+.navbar .curr-path {
+    /* border: 2px solid rgb(205, 198, 16); */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.curr-path p {
+    margin: 0;
+    padding: 6px;
+}
+
+.navbar .nav-btns {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(19, 19, 19, 0.3);
+}
+
+.navbar button {
+    font-size: 15px;
+    padding: 10px;
+    margin: 0 5px 0 5px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid rgba(200, 200, 200, 0.3);
+    /* outline: 4px auto blue; */
+}
+
+.navbar button:hover {
+    border: 1px solid rgb(183, 39, 255);
+}
+
+.active {
+    /* border: 1px solid #646cff !important; */
+    border: none !important;
+}
