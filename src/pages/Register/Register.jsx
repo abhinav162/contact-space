@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axiosInstance from '../../axios';
 import { ToastContainer, toast } from "react-toastify";
 
 const Register = () => {
@@ -16,7 +16,7 @@ const Register = () => {
       password,
     };
 
-    axios
+    axiosInstance()
       .post("/register", requestBody)
       .then((res) => {
         setName("");
