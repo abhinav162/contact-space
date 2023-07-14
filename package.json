@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": " (npm run start-watch) | (npm run dev)",
-    "dev": "vite",
+    "start": "vite",
     "start-watch": "start cmd /k nodemon ../backend/index.js",
+    "start-both": " (npm run start-watch) | (npm run dev)",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
