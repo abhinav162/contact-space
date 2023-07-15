@@ -29,14 +29,14 @@ const Register = () => {
         setUsername("");
         setPassword("");
 
-        toast.success(res.data.message,{
+        toast.success(res.data.message, {
           duration: 2000,
           position: 'top-center',
         })
         navigate("/login");
       })
       .catch((err) => {
-        toast.error(err.response.data.message,{
+        toast.error(err.response.data.message, {
           duration: 2000,
           position: 'top-center',
         });
@@ -46,6 +46,7 @@ const Register = () => {
   return (
     <>
       <form onSubmit={addUser} className="register-form">
+        <h1 className="register-heading">REGISTER</h1>
         <div>
           <label htmlFor="name">Name:</label>
           <input

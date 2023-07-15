@@ -32,6 +32,7 @@ const Contacts = () => {
     return (
         <>
             <div className='contacts-container'>
+                <h1>All Contacts</h1>
                 {
                     contacts.length != 0
                         ?
@@ -57,15 +58,15 @@ const Contacts = () => {
                                                     }}>Edit</button> </td>
                                                     <td> <button onClick={() => {
                                                         axiosInstance().delete('/delete-contact/' + contact._id).then(() => {
-                                                            toast.success("Contact deleted successfully",{
-                                                                duration:2000,
-                                                                position:'top-center'
+                                                            toast.success("Contact deleted successfully", {
+                                                                duration: 2000,
+                                                                position: 'top-center'
                                                             })
                                                             fetchContacts();
                                                         })
-                                                        .catch((err) => {
-                                                            toast.error(err.response.data.message);
-                                                        })
+                                                            .catch((err) => {
+                                                                toast.error(err.response.data.message);
+                                                            })
                                                     }}>Delete</button> </td>
                                                 </tr>
                                             );

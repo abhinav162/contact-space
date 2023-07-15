@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import axiosInstance from '../../axios';
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import './Login.css';
 
-const Login = ({ currPage, setCurrentPage}) => {
+const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -32,9 +32,8 @@ const Login = ({ currPage, setCurrentPage}) => {
           setUsername("");
           setPassword("");
           navigate("/");
-          setCurrentPage("home")
         }, 1000);
-        
+
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -44,6 +43,7 @@ const Login = ({ currPage, setCurrentPage}) => {
   return (
     <>
       <form onSubmit={addUser} className="login-form">
+          <h1>LOGIN</h1>
         <div>
           <label htmlFor="">Username:</label>
           <input

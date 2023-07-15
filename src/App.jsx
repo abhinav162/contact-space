@@ -11,50 +11,36 @@ function App() {
   const location = useLocation()
   const [currPage, setCurrPage] = useState("home")
 
+  useEffect(() => {
+    const currentPathname = location.pathname.split('/')[1];
+
+    setCurrPage(currentPathname || 'home');
+  }, [location]);
+
+  useEffect(() => {
+    if (currPage !== 'login' && currPage !== 'register' && currPage !== 'update-contact') {
+      document.getElementsByClassName('active')[0].classList.remove('active');
+      document.getElementById(currPage).classList.add('active');
+    }
+  }, [currPage])
+
   const handleClick = useCallback((id) => {
     if (id === "home") {
-      setCurrPage("home")
       navigate('/')
     }
     else if (id === "add-contact") {
-      setCurrPage("add-contact")
       navigate('/add-contact')
     }
     else if (id === "logout") {
-      setCurrPage("logout")
       navigate('/')
     }
     else if (id == "register") {
-      setCurrPage("register")
       navigate('/register')
     }
     else if (id == "login") {
-      setCurrPage("login")
       navigate('/login')
     }
-  },[navigate])
-
-  // const handleLoginClick = useCallback(() => {
-  //   setCurrPage("login");
-  //   navigate('/login');
-  // }, [navigate]);
-
-  // const makeActive = (id) => {
-  //   const currActive = document.getElementsByClassName('active');
-  //   const currId = currActive[0].id
-
-  //   const currPath = window.location.pathname.split('/')[1]
-  //   console.log(currPath)
-  //   if (currPath === "") { setCurrPage("home") }
-  //   else {
-  //     setCurrPage(currPath)
-  //   }
-
-  //   if (currId !== currPath) {
-  //     currActive[0].classList.remove('active');
-  //     document.getElementById(id).classList.add('active');
-  //   }
-  // }
+  }, [navigate])
 
   const token = localStorage.getItem('token');
 
@@ -72,7 +58,9 @@ function App() {
                     <button id='login' onClick={() => {
                       handleClick('login');
                     }}>Login</button>
-                    <a href="/register">Register</a>
+                    <button id='register' onClick={() => {
+                      handleClick("register")
+                    }}>Register</button>
                   </div>
                 </>
               )
@@ -116,14 +104,6 @@ function App() {
                 localStorage.removeItem('token')
               }}>Logout</button>
             ) : null
-          }
-
-          {
-            token ? (
-              null
-            ) : <button id='register' onClick={() => {
-              handleClick("register");
-            }}>Register</button>
           }
         </div>
       </div>

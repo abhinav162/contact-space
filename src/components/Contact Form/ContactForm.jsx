@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./ContactForm.css";
 import { Toaster, toast } from "react-hot-toast";
 
-const ContactForm = ({currPage,setCurrentPage}) => {
+const ContactForm = ({ currPage, setCurrentPage }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [name, setName] = useState('');
@@ -73,6 +73,7 @@ const ContactForm = ({currPage,setCurrentPage}) => {
     return (
         <>
             <form onSubmit={addContact} className="add-contact-form">
+                {route === "update-contact" ? (<h1>UPDATE CONTACT</h1>) : (<h1>ADD CONTACT</h1>)}
                 <div>
                     <label htmlFor="name">Name :</label>
                     <input type="text" name="name" id="name" placeholder="Enter Name" onChange={(e) => setName(e.target.value)} value={name} />
