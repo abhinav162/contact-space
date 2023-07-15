@@ -3,7 +3,6 @@ import axiosInstance from '../../axios';
 import { useNavigate } from 'react-router-dom';
 import './Contacts.css';
 import Loader from '../../components/Loader/Loader';
-import { Toaster, toast } from 'react-hot-toast'
 
 const Contacts = () => {
     const navigate = useNavigate();
@@ -79,7 +78,6 @@ const Contacts = () => {
                         <p className='n'>No Contacts</p>
                 }
             </div>
-            <Toaster />
         </>
     )
 }
