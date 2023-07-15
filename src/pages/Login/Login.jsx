@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axiosInstance from '../../axios';
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
+import './Login.css';
 
-const Login = () => {
+const Login = ({ currPage, setCurrentPage}) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,48 +20,37 @@ const Login = () => {
     axiosInstance()
       .post("/login", requestBody)
       .then((res) => {
-        setUsername("");
-        setPassword("");
-
-        toast.success(res.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-
         const token = res.data.token;
         localStorage.setItem("token", token);
 
-        navigate("/");
+        toast.success(res.data.message, {
+          duration: 2000,
+          position: 'top-center',
+        })
+
+        setTimeout(() => {
+          setUsername("");
+          setPassword("");
+          navigate("/");
+          setCurrentPage("home")
+        }, 1000);
+        
       })
       .catch((err) => {
-        toast.error(err.response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        toast.error(err.response.data.message);
       });
   };
 
   return (
     <>
-      <form onSubmit={addUser}>
+      <form onSubmit={addUser} className="login-form">
         <div>
           <label htmlFor="">Username:</label>
           <input
             type="text"
             name="username"
             id="username"
+            placeholder="Enter your username"
             onChange={(e) => {
               setUsername(e.target.value);
             }}
@@ -74,6 +63,7 @@ const Login = () => {
             type="password"
             name="password"
             id="password"
+            placeholder="Enter your password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -81,10 +71,12 @@ const Login = () => {
           />
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Login</button>
+
+        <p>Dont have an account? <a href="/register">Register</a></p>
       </form>
 
-      <ToastContainer />
+      <Toaster />
     </>
   );
 };

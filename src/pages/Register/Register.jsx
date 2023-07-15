@@ -1,8 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from '../../axios';
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+
+import { Toaster, toast } from 'react-hot-toast';
+import "./Register.css"
 
 const Register = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,40 +29,30 @@ const Register = () => {
         setUsername("");
         setPassword("");
 
-        toast.success(res.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        toast.success(res.data.message,{
+          duration: 2000,
+          position: 'top-center',
+        })
+        navigate("/login");
       })
       .catch((err) => {
-        toast.error(err.response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
+        toast.error(err.response.data.message,{
+          duration: 2000,
+          position: 'top-center',
         });
       });
   };
 
   return (
     <>
-      <form onSubmit={addUser}>
+      <form onSubmit={addUser} className="register-form">
         <div>
           <label htmlFor="name">Name:</label>
           <input
             type="text"
             name="name"
             id="name"
+            placeholder="Name"
             onChange={(e) => {
               setName(e.target.value);
             }}
@@ -69,6 +65,7 @@ const Register = () => {
             type="text"
             name="username"
             id="username"
+            placeholder="Create Username"
             onChange={(e) => {
               setUsername(e.target.value);
             }}
@@ -81,6 +78,7 @@ const Register = () => {
             type="password"
             name="password"
             id="password"
+            placeholder="Create Password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -88,10 +86,10 @@ const Register = () => {
           />
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Register</button>
       </form>
 
-      <ToastContainer />
+      <Toaster />
     </>
   );
 };

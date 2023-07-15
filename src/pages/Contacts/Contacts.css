@@ -33,3 +33,7 @@ table  {
     margin: 20px 0;
     border-radius: 10px;
 }
+
+.contacts-container button {
+    margin: 0;
+}

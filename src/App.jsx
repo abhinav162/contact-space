@@ -1,18 +1,17 @@
-import { useEffect, useState, createContext } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import './App.css'
 import { Navigate, Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import Contacts from './pages/Contacts/Contacts'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import ContactForm from './components/Contact Form/ContactForm'
-// import makeActive from './makeActive'
 
 function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const [currPage, setCurrPage] = useState("home")
 
-  const handleClick = (id) => {
+  const handleClick = useCallback((id) => {
     if (id === "home") {
       setCurrPage("home")
       navigate('/')
@@ -29,11 +28,16 @@ function App() {
       setCurrPage("register")
       navigate('/register')
     }
-    else if (id === "login") {
+    else if (id == "login") {
       setCurrPage("login")
       navigate('/login')
     }
-  }
+  },[navigate])
+
+  // const handleLoginClick = useCallback(() => {
+  //   setCurrPage("login");
+  //   navigate('/login');
+  // }, [navigate]);
 
   // const makeActive = (id) => {
   //   const currActive = document.getElementsByClassName('active');
@@ -63,26 +67,28 @@ function App() {
             token ? <Contacts /> :
               (
                 <>
-                  <p>Log in or Register</p>
-                  <div className='btns'>
+                  <div className='home-login-container'>
+                    <p>Log in or Register</p>
                     <button id='login' onClick={() => {
-                      handleClick("login");
-                      navigate('/login');
+                      handleClick('login');
                     }}>Login</button>
+                    <a href="/register">Register</a>
                   </div>
                 </>
               )
           );
         }} />
         <Route path="/register" Component={Register} />
-        <Route path="/login" Component={Login} />
+        <Route path="/login" Component={() => {
+          return token ? <Contacts /> : <Login currPage={currPage} setCurrentPage={setCurrPage} />;
+        }} />
         <Route path="*" Component={Login} />
 
         <Route path="/add-contact" Component={() => {
-          return token ? <ContactForm /> : Navigate({ to: '/login' });
+          return token ? <ContactForm currPage={currPage} setCurrentPage={setCurrPage} /> : Navigate({ to: '/login' });
         }} />
         <Route path="/update-contact/:contact_id" Component={() => {
-          return token ? <ContactForm /> : Navigate({ to: '/login' });
+          return token ? <ContactForm currPage={currPage} setCurrentPage={setCurrPage} /> : Navigate({ to: '/login' });
         }} />
       </Routes>
 
@@ -112,9 +118,13 @@ function App() {
             ) : null
           }
 
-          <button id='register' onClick={() => {
-            handleClick("register");
-          }}>Register</button>
+          {
+            token ? (
+              null
+            ) : <button id='register' onClick={() => {
+              handleClick("register");
+            }}>Register</button>
+          }
         </div>
       </div>
     </>

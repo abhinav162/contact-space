@@ -1,3 +1,11 @@
+:root {
+    --primary-color: #1a1a1a;
+    --sec-color: #646cff;
+    --ter-color: #373636;
+    font-size: large;
+    text-align: left;
+}
+
 .navbar {
     position: fixed;
     bottom: 10px;
@@ -8,7 +16,7 @@
     border-radius: 5px;
     display: flex;
     align-items: center;
-    justify-content:center ;
+    justify-content: center;
     gap: 5px;
 }
 
@@ -24,13 +32,54 @@
     padding: 6px;
 }
 
+.home-login-container {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background-color: var(--primary-color);
+    padding: 80px;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.home-login-container p {
+    font-size: 30px;
+}
+
+.home-login-container a {
+    text-decoration: none;
+    color: rgb(127, 90, 240, 0.9);
+}
+
+.home-login-container a:hover {
+    color: rgba(127, 90, 240, 1);
+}
+
+.home-login-container button {
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(183, 39, 255);
+    border: none;
+    width: 60%;
+}
+
+.home-login-container button:hover {
+    background-color: rgba(183, 39, 255, 0.9);
+    border: none;
+}
+
 .navbar .nav-btns {
     padding: 10px;
     border-radius: 5px;
     background-color: rgba(19, 19, 19, 0.3);
 }
 
-.navbar button {
+button {
     font-size: 15px;
     padding: 10px;
     margin: 0 5px 0 5px;
@@ -40,11 +89,15 @@
     /* outline: 4px auto blue; */
 }
 
-.navbar button:hover {
+button:hover {
     border: 1px solid rgb(183, 39, 255);
 }
 
 .active {
     /* border: 1px solid #646cff !important; */
     border: none !important;
+}
+
+button:hover {
+    cursor:pointer;
 }

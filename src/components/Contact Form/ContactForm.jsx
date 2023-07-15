@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axiosInstance from "../../axios.js";
 import { useNavigate, useLocation } from "react-router-dom";
+import "./ContactForm.css";
+import { Toaster, toast } from "react-hot-toast";
 
-const ContactForm = () => {
+const ContactForm = ({currPage,setCurrentPage}) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [name, setName] = useState('');
@@ -38,36 +40,54 @@ const ContactForm = () => {
 
         if (route === 'update-contact') {
             axiosInstance().patch('/update-contact/' + contact_id, reqBody).then(() => {
-                navigate('/');
+                toast.success("Contact Updated Successfully", {
+                    duration: 2000,
+                    position: 'top-center',
+                })
+
+                setTimeout(() => {
+                    setName("");
+                    setNumber("");
+                    setCurrentPage("home")
+                    navigate("/");
+                }, 1000)
             })
-            setName("");
-            setNumber("");
-            navigate("/");
         }
         else {
             axiosInstance().post('/add-contact', reqBody).then(() => {
-                setName("");
-                setNumber("");
-                navigate("/");
+                toast.success("Contact Added Successfully", {
+                    duration: 2000,
+                    position: 'top-center',
+                })
+
+                setTimeout(() => {
+                    setName("");
+                    setNumber("");
+                    setCurrentPage("home")
+                    navigate("/");
+                }, 1000)
             })
         }
     }
 
     return (
-        <form onSubmit={addContact}>
-            <div>
-                <label htmlFor="name">Name</label>
-                <input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)} value={name} />
-            </div>
-            <div>
-                <label htmlFor="number">Number</label>
-                <input type="text" name="number" id="number" onChange={(e) => setNumber(e.target.value)} value={number} />
-            </div>
+        <>
+            <form onSubmit={addContact} className="add-contact-form">
+                <div>
+                    <label htmlFor="name">Name :</label>
+                    <input type="text" name="name" id="name" placeholder="Enter Name" onChange={(e) => setName(e.target.value)} value={name} />
+                </div>
+                <div>
+                    <label htmlFor="number">Number :</label>
+                    <input type="text" name="number" id="number" placeholder="Enter Contact Number" onChange={(e) => setNumber(e.target.value)} value={number} />
+                </div>
 
-            <button type="submit">
-                {route === "update-contact" ? "Update" : "Add"}
-            </button>
-        </form>
+                <button type="submit">
+                    {route === "update-contact" ? "Update" : "Add"}
+                </button>
+            </form>
+            <Toaster />
+        </>
     )
 }
 
