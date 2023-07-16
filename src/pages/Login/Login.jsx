@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axiosInstance from '../../axios';
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
@@ -21,7 +21,9 @@ const Login = () => {
       .post("/login", requestBody)
       .then((res) => {
         const token = res.data.token;
+        const name = res.data.user.name;
         localStorage.setItem("token", token);
+        localStorage.setItem("name", name);
 
         toast.success(res.data.message, {
           duration: 2000,

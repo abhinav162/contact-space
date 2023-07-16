@@ -5,6 +5,7 @@ import Contacts from './pages/Contacts/Contacts'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import ContactForm from './components/Contact Form/ContactForm'
+import logo from '../src/assets/logo-full.png'
 
 function App() {
   const navigate = useNavigate()
@@ -43,6 +44,7 @@ function App() {
   }, [navigate])
 
   const token = localStorage.getItem('token');
+  token ? console.log(localStorage.getItem('name')) : console.log("no token")
 
   return (
     <>
@@ -68,7 +70,7 @@ function App() {
         }} />
         <Route path="/register" Component={Register} />
         <Route path="/login" Component={() => {
-          return token ? <Contacts /> : <Login currPage={currPage} setCurrentPage={setCurrPage} />;
+          return token ? <Contacts /> : <Login />;
         }} />
         <Route path="*" Component={Login} />
 
@@ -79,6 +81,16 @@ function App() {
           return token ? <ContactForm currPage={currPage} setCurrentPage={setCurrPage} /> : Navigate({ to: '/login' });
         }} />
       </Routes>
+
+      <div className='top-bar'>
+        <div className='logo'>
+          <img src={logo} alt='logo' onClick={() => { navigate('/') }} />
+        </div>
+
+        <div className='user'>
+          {token ? <p>{localStorage.getItem('name')}</p> : <p>LOGGED OUT</p>}
+        </div>
+      </div>
 
       <div className='navbar'>
         <div className='curr-path'>
