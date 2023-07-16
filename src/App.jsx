@@ -44,7 +44,6 @@ function App() {
   }, [navigate])
 
   const token = localStorage.getItem('token');
-  token ? console.log(localStorage.getItem('name')) : console.log("no token")
 
   return (
     <>
