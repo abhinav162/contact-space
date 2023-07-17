@@ -36,12 +36,12 @@ const Contacts = () => {
                     contacts.length != 0
                         ?
                         <>
-                            <table>
+                            <table className='fixed_header'>
                                 <thead>
                                     <tr style={{ background: 'var(--ter-color)' }}>
-                                        <th>Name</th>
-                                        <th>Number</th>
-                                        <th colSpan={2} >Actions</th>
+                                        <th className='nameCol'>Name</th>
+                                        <th className='numCol'>Number</th>
+                                        <th colSpan={2} className='actionCol'>Actions</th>
                                     </tr>
                                 </thead>
 
@@ -50,9 +50,9 @@ const Contacts = () => {
                                         contacts.map((contact, i) => {
                                             return (
                                                 <tr key={i}>
-                                                    <td>{contact.name}</td>
-                                                    <td>{contact.number}</td>
-                                                    <td> <button onClick={() => {
+                                                    <td className='nameCell'>{contact.name}</td>
+                                                    <td className='numCell'>{contact.number}</td>
+                                                    <td className='actionCell'> <button onClick={() => {
                                                         navigate("/update-contact/" + contact._id)
                                                     }}>Edit</button> </td>
                                                     <td> <button onClick={() => {

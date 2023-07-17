@@ -11,12 +11,13 @@ body {
 }
 
 .contacts-container {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--primary-color);
-    width: 60%;;
+    width: 60%;
+    height: 65vh;
     padding: 30px;
     border-radius: 10px;
 
@@ -26,14 +27,51 @@ body {
     justify-content: center;
 }
 
-table  {
-    width: 80%;
+.contacts-container button {
+    margin: 0;
+}
+
+.table {
+    width: 90%;
     border-collapse: collapse;
     border-spacing: 0;
     margin: 20px 0;
     border-radius: 10px;
 }
 
-.contacts-container button {
-    margin: 0;
+.fixed_header thead {
+    width: 600px;
+}
+
+.fixed_header tbody {
+    width: 600px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    display: block;
+    overflow: auto;
+    height: 50vh;
+}
+
+.fixed_header thead tr {
+    display: block;
+    width: 98%;
+}
+
+.fixed_header tbody tr {
+    display: block;
+}
+
+th.nameCol,td.nameCell {
+    width: 200px;
+}
+
+th.numCol,td.numCell {
+    width: 150px;
+}
+
+th.actionCol {
+    width: 250px;
+}
+td.actionCell {
+    width: 100px;
 }
